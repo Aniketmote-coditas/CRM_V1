@@ -66,6 +66,7 @@ public class AddCustomer extends HttpServlet {
         session.save(employee);
         transaction.commit();
         session.close();
+        sessionFactory.close();
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("AddCustomer.jsp");
         dispatcher.include(request, response);

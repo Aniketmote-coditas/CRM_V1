@@ -50,13 +50,13 @@
       <c:forEach var="crm" items="${crmList}">
 
         <tr>
-          <td><c:out value="${crm.custommerId}" /></td>
-          <td><c:out value="${crm.custommername}" /></td>
-          <td><c:out value="${crm.custommeremail}" /></td>
-          <td><c:out value="${crm.custommercity}" /></td>
-          <td><a href="edit?id=<c:out value='${crm.custommerId}' />">Edit</a>
+          <td><c:out value="${crm.customerId}" /></td>
+          <td><c:out value="${crm.customername}" /></td>
+          <td><c:out value="${crm.customeremail}" /></td>
+          <td><c:out value="${crm.customercity}" /></td>
+          <td><a href="edit?id=<c:out value='${crm.customerId}' />">Edit</a>
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="delete?id=<c:out value='${crm.custommerId}' />">Delete</a></td>
+            <a href="delete?id=<c:out value='${crm.customerId}' />">Delete</a></td>
 
         </tr>
       </c:forEach>
