@@ -24,8 +24,7 @@ public class ShowCustomer extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         HttpSession session2 = request.getSession(false);
-        int empid  = (int) request.getAttribute("empId");
-
+        int empid  = (int) session2.getAttribute("empId");
         Configuration configuration = new Configuration().configure();
         SessionFactory sessionFactory = configuration.buildSessionFactory();
         Session session3 = sessionFactory.openSession();
@@ -35,13 +34,11 @@ public class ShowCustomer extends HttpServlet {
         /*List<Customer> list = session3.createQuery("from Customer where employee_empid= :eid")
                 .setParameter("eid", eid)
                 .list();*/
-        List<Customer> list = session3.createQuery("FROM Customer WHERE employee.empid = :empid", Customer.class)
-                .setParameter("empid", empid)
-                .getResultList();
+        List<Customer> list = session3.createQuery("FROM Customer WHERE employee.empid ="+empid+"").list();
         request.setAttribute("crmList", list);
         transaction.commit();
         session3.close();
-
+        sessionFactory.close();
         RequestDispatcher dispatcher = request.getRequestDispatcher("Customer-list.jsp");
         dispatcher.forward(request, response);
     }

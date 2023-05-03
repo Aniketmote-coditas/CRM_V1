@@ -42,7 +42,7 @@ public class AddEmployee extends HttpServlet {
         session.saveOrUpdate(employee);
         transaction.commit();
         session.close();
-
+        sessionFactory.close();
         RequestDispatcher dispatcher = request.getRequestDispatcher("AddEmployee.jsp");
         dispatcher.include(request, response);
     }

@@ -46,13 +46,16 @@ public class loginSerrvlet extends HttpServlet {
                 if (employee.getEmpid() == id && employee.getPassword().equals(password)) {
                     flag=true;
                     session2.setAttribute("empId", employee.getEmpid());
-
+                    session1.close();
+                    sessionFactory.close();
                     RequestDispatcher rd = request.getRequestDispatcher("EmployeePanel.jsp");
                     rd.forward(request, response);
                 }
 
             }
             if(flag==false){
+                session1.close();
+                sessionFactory.close();
                 RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
                 request.setAttribute("errorMsg", "Data not found Contact Admin");
                 rd.include(request, response);
@@ -60,7 +63,8 @@ public class loginSerrvlet extends HttpServlet {
         }else{
             boolean flag=false;
             List<Customer> customers = session1.createQuery("from Customer").list();
-
+            session1.close();
+            sessionFactory.close();
             for (Customer customer : customers) {
                 if (customer.getCustomerId() == id && customer.getCustomerpassword().equals(password)) {
                     session3.setAttribute("customerId", customer.getCustomerId());
@@ -71,6 +75,8 @@ public class loginSerrvlet extends HttpServlet {
 
             }
             if(flag==false){
+                session1.close();
+                sessionFactory.close();
                 RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
                 request.setAttribute("errorMsg", "Data not found Contact Admin");
                 rd.include(request, response);
